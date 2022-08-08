@@ -51,43 +51,25 @@ public class MessageHandler implements Handler<Message> {
                         sendMessage.setText("Я підсистема Extinguisher Bot \uD83C\uDDFA\uD83C\uDDE6 \n Допоможу вибрати тип та необхідну кількість вогнегасників \uD83E\uDDEF \n\n Для початку роботи натисніть <Розпочати> \n\n \uD83D\uDCDA Для ознайомлення з інструкцією користувача скористайтесь відповідним меню");
                         sendMessage.setReplyMarkup(inlineButton.inlineFireExtinguisherStartKeyboard());
                         messageSender.sendMessage(sendMessage);
-                        variables.data.clear();
-                        variables.setTypePremises(null);
-                        variables.setCategoryPremises(null);
-                        variables.setClassFire(null);
-                        variables.setTypeExtinguisher(null);
-                        variables.setTypeSpacesBuild(null);
-                        variables.setB1(false);
-                        variables.setB2(false);
-                        variables.setCharacteristicsObject(null);
-                        variables.setTypeObjectOfRisk(null);
-                        variables.setTypeStateOwnedObject(null);
-                        variables.setTypeCulturalObject(null);
-                        variables.setTypeIndustrialStorageFacility(null);
-                        variables.setLevelEmergency(null);
-                        variables.setTypeResultDegreeRisk(null);
+                        //обнуляємо змінні
+                        variables.setVariables();
                         return;
                     // визначення ступення ризику
                     case "/degree_of_risk_from_activities":
                         variables.setComandOfMenu("/degree_of_risk_from_activities");
-                        sendMessage.setText("Я підсистема Degree of subject risk Bot \uD83C\uDDFA\uD83C\uDDE6 \n Допоможу визначити ступніть ризику від провадження господарської діяльності \uD83D\uDD25 \n\n Для початку роботи натисніть <Розпочати> \n\n \uD83D\uDCDA Для ознайомлення з інструкцією користувача скористайтесь відповідним меню");
-                        sendMessage.setReplyMarkup(inlineButton.inlineDegreeOfRiskStartKeyboard());
+                        sendMessage.setText("Я підсистема Degree of subject risk Bot \uD83C\uDDFA\uD83C\uDDE6 \n Допоможу визначити ступніть ризику від провадження господарської діяльності \uD83D\uDD25 \n\n Для початку роботи натисніть <Розпочати>");
+                        sendMessage.setReplyMarkup(inlineButton.inlineStartKeyboard());
                         messageSender.sendMessage(sendMessage);
-                        variables.data.clear();
-                        variables.setTypePremises(null);
-                        variables.setCategoryPremises(null);
-                        variables.setClassFire(null);
-                        variables.setTypeExtinguisher(null);
-                        variables.setTypeSpacesBuild(null);
-                        variables.setB1(false);
-                        variables.setB2(false);
-                        variables.setCharacteristicsObject(null);
-                        variables.setTypeObjectOfRisk(null);
-                        variables.setTypeStateOwnedObject(null);
-                        variables.setTypeCulturalObject(null);
-                        variables.setTypeIndustrialStorageFacility(null);
-                        variables.setLevelEmergency(null);
-                        variables.setTypeResultDegreeRisk(null);
+                        //обнуляємо змінні
+                        variables.setVariables();
+                        return;
+                    case "/determination_of_categories":
+                        variables.setComandOfMenu("/determination_of_categories");
+                        sendMessage.setText("Я підсистема Determination of categories of premisses according to fire hazard \uD83C\uDDFA\uD83C\uDDE6 \n Допоможу з визначенням категорій приміщень,будинків та зовнішніх установок за вибухопожежною та пожежною небезпекою \uD83D\uDD25 \n\n Для початку роботи натисніть <Розпочати>");
+                        sendMessage.setReplyMarkup(inlineButton.inlineStartKeyboard());
+                        messageSender.sendMessage(sendMessage);
+                        //обнуляємо змінні
+                        variables.setVariables();
                         return;
                     case "/feedback_info":
                         sendMessage.setText(instructionExtinguisher.feedback());

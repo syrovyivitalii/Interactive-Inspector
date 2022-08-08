@@ -23,6 +23,9 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
     InstructionExtinguisher instructionExtinguisher = new InstructionExtinguisher();
     InlineButton inlineButton = new InlineButton();
     Variables variables = new Variables();
+    Categories categories = new Categories();
+    Characteristics characteristics = new Characteristics();
+    CategoryBuilding categoryBuilding = new CategoryBuilding();
 
     //
     String s2 = null;
@@ -51,11 +54,16 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 if (variables.getComandOfMenu() == "/type_number_fire_extinguishers") {
                     sendMessage.setText("1. Оберіть тип приміщення/об'єкту");
                     sendMessage.setReplyMarkup(inlineButton.inlineFireExtinguisherTypesKeyboard());
+                    messageSender.sendMessage(sendMessage);
                 }else if (variables.getComandOfMenu() == "/degree_of_risk_from_activities"){
                     sendMessage.setText("1. Оберіть характеристику об’єкта");
                     sendMessage.setReplyMarkup(inlineButton.inlineDegreeOfRiskTechnicalPremisesKeyboard());
+                    messageSender.sendMessage(sendMessage);
+                }else if(variables.getComandOfMenu() == "/determination_of_categories") {
+                    sendMessage.setText("1. Оберіть характеристику, що необхідно визначити");
+                    sendMessage.setReplyMarkup(inlineButton.inlineDeterminationCharacteristicKeyboard());
+                    messageSender.sendMessage(sendMessage);
                 }
-                messageSender.sendMessage(sendMessage);
                 break;
             case "Інструкція":
                 sendMessage.setText(instructionExtinguisher.instruction());
@@ -325,7 +333,7 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 messageSender.sendMessage(sendMessage);
                 break;
             case "Розрахувати":
-                if (variables.getTypePremises() == "Гаражі") {
+                if (variables.getTypePremises().equals("Гаражі")) {
                     sendMessage.setText(result());
                     messageSender.sendMessage(sendMessage);
                 } else {
@@ -545,10 +553,10 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 messageSender.sendMessage(sendSecondMessage);
                 break;
             case "Далі":
-                if (variables.getCharacteristicsObject() == "експлуатується") {
-                    if ((variables.getData().size() == 4 && variables.getLevelEmergency() == "НС державного рівня") // приймає порушення які були усунуті
-                            || (variables.getData().size() == 5 && variables.getLevelEmergency() == "НС регіонального рівня")
-                            || (variables.getData().size() == 7 && variables.getLevelEmergency() == "НС місцевого рівня")
+                if (variables.getCharacteristicsObject().equals("експлуатується")) {
+                    if ((variables.getData().size() == 4 && variables.getLevelEmergency().equals("НС державного рівня")) // приймає порушення які були усунуті
+                            || (variables.getData().size() == 5 && variables.getLevelEmergency().equals("НС регіонального рівня"))
+                            || (variables.getData().size() == 7 && variables.getLevelEmergency().equals("НС місцевого рівня"))
                             || (variables.getData().size() == 8
                             && (variables.getLevelEmergency() == "НС об’єктового рівня" || variables.getLevelEmergency() == "не класифікована НС"))
                             || (variables.getData().size() == 4 && variables.getLevelEmergency() == "без НС")) {
@@ -1042,7 +1050,351 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 messageSender.sendMessage(sendMessage);
                 messageSender.sendMessage(sendSecondMessage);
                 break;
+
+            //визначення категорій приміщень за пожежною небезпекою
+            case "Категорія Прим./Буд/Зовн.Уст":
+                sendMessage.setText("2. Оберіть місце розташування технологічної установки");
+                sendMessage.setReplyMarkup(inlineButton.inlineDeterminationLocationKeyboard());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "Використовується в прим.":
+                sendMessage.setText("2. Оберіть вид речовини, що обертається у технологічному процесі");
+                sendMessage.setReplyMarkup(inlineButton.inlineDeterminationTypeOfSubstanceRoomsKeyboard());
+                variables.setUsedIndoors(true);
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "Так, є необхідність":
+                sendMessage.setText("1. Надішліть об'єм будівлі та натисніть \" Далі \" ");
+                sendMessage.setReplyMarkup(inlineButton.inlineDeterminationContinueKeyboard());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "Ні, необхідність відсутня":
+                sendMessage.setText("🇺🇦 Для початку роботи повторно скористайтеся командами бота Fire Safety Bot 👇");
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "Використовується на вулиці":
+                sendMessage.setText("2. Оберіть вид речовини, що обертається у технологічному процесі");
+                sendMessage.setReplyMarkup(inlineButton.inlineDeterminationTypeOfSubstanceExternalKeyboard());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "Категорія приміщення":
+                sendMessage.setText("2. Оберіть вид речовини, що обертається у технологічному процесі");
+                sendMessage.setReplyMarkup(inlineButton.inlineDeterminationTypeOfSubstanceRoomsKeyboard());
+                messageSender.sendMessage(sendMessage);
+                break;
+            //характеристики горючих/негорючих речовин що обертаються в технологічному процесі
+            case "Горючі гази":
+                sendMessage.setText(characteristics.getCharacteristicCombustibleGasesRooms());
+                sendMessage.setReplyMarkup(inlineButton.inlineDeterminationCharacteristicCombustibleGasesKeyboard());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "Легкозаймисті рідини":
+                sendMessage.setText(characteristics.getCharacteristicFlammableLiquidsRooms());
+                sendMessage.setReplyMarkup(inlineButton.inlineDeterminationCharacteristicFlammableLiquidsKeyboard());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "Вибухові речовини":
+                sendMessage.setText(characteristics.getCharacteristicExplosiveSubstancesRooms());
+                sendMessage.setReplyMarkup(inlineButton.inlineDeterminationCharacteristicExplosiveSubstancesKeyboard());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "Горючі рідини":
+                sendMessage.setText(characteristics.getCharacteristicCombustibleLiquidsRooms());
+                sendMessage.setReplyMarkup(inlineButton.inlineDeterminationCharacteristicCombustibleLiquidsKeyboard());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "Горючі пили":
+                sendMessage.setText(characteristics.getCharacteristicCombustibleSawsRooms());
+                sendMessage.setReplyMarkup(inlineButton.inlineDeterminationCharacteristicCombustibleSawsKeyboard());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "Горючі волокна":
+                sendMessage.setText(s4);
+                sendMessage.setReplyMarkup(inlineButton.inlineDeterminationCharacteristicCombustibleFibersKeyboard());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "Тверді горючі речовини":
+                sendMessage.setText(characteristics.getCharacteristicSolidСombustibleSubstancesRooms());
+                sendMessage.setReplyMarkup(inlineButton.inlineDeterminationCharacteristicSolidСombustibleSubstancesKeyboard());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "Тверді важкогорючі речовини":
+                sendMessage.setText(characteristics.getCharacteristicSolidHighlyFlammableSubstancesRooms());
+                sendMessage.setReplyMarkup(inlineButton.inlineDeterminationCharacteristicSolidHighlyFlammableSubstancesKeyboard());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "Важкогорючі рідини":
+                sendMessage.setText(characteristics.getCharacteristicHighlyFlammableLiquidRooms());
+                sendMessage.setReplyMarkup(inlineButton.inlineDeterminationCharacteristicHighlyFlammableLiquidKeyboard());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "Негорючі речовини":
+                sendMessage.setText(characteristics.getCharacteristicNonCombustibleSubstancesRooms());
+                sendMessage.setReplyMarkup(inlineButton.inlineDeterminationCharacteristicNonCombustibleSubstancesKeyboard());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "2.1 Горючі гази":
+            case "2.1 Легкозаймисті рідини":
+            case "2.1 Вибухові речовини":
+                sendMessage.setText(categories.getCategoryA());
+                messageSender.sendMessage(sendMessage);
+                if (variables.isUsedIndoors()){
+                    sendMessage.setText("Чи є необхідність визначити категорію будівлі?");
+                    sendMessage.setReplyMarkup(inlineButton.inlineDeterminationNecessityCategoriesKeyboard());
+                    messageSender.sendMessage(sendMessage);
+                }
+                break;
+            case "2.2 Легкозаймисті рідини":
+            case "2.1 Горючі рідини":
+            case "2.1 Горючі пили":
+            case "2.1 Горючі волокна":
+                sendMessage.setText(categories.getCategoryБ());
+                messageSender.sendMessage(sendMessage);
+                if (variables.isUsedIndoors()){
+                    sendMessage.setText("Чи є необхідність визначити категорію будівлі?");
+                    sendMessage.setReplyMarkup(inlineButton.inlineDeterminationNecessityCategoriesKeyboard());
+                    messageSender.sendMessage(sendMessage);
+                }
+                break;
+            case "2.2 Горючі гази":
+            case "2.3 Легкозаймисті рідини":
+            case "2.2 Вибухові речовини":
+            case "2.2 Горючі рідини":
+            case "2.2 Горючі пили":
+            case "2.2 Горючі волокна":
+            case "2.1 Тверді горючі речовини":
+            case "2.1 Тверді важкогорючі речовини":
+            case "2.1 Важкогорючі рідини":
+                sendMessage.setText(categories.getCategoryВ());
+                messageSender.sendMessage(sendMessage);
+                if (variables.isUsedIndoors()){
+                    sendMessage.setText("Чи є необхідність визначити категорію будівлі?");
+                    sendMessage.setReplyMarkup(inlineButton.inlineDeterminationNecessityCategoriesKeyboard());
+                    messageSender.sendMessage(sendMessage);
+                }
+                break;
+            case "2.3 Горючі гази":
+            case "2.4 Легкозаймисті рідини":
+            case "2.3 Горючі рідини":
+            case "2.2 Тверді горючі речовини":
+            case "2.1 Негорючі речовини":
+                sendMessage.setText(categories.getCategoryГ());
+                messageSender.sendMessage(sendMessage);
+                if (variables.isUsedIndoors()){
+                    sendMessage.setText("Чи є необхідність визначити категорію будівлі?");
+                    sendMessage.setReplyMarkup(inlineButton.inlineDeterminationNecessityCategoriesKeyboard());
+                    messageSender.sendMessage(sendMessage);
+                }
+                break;
+            case "2.5 Легкозаймисті рідини":
+            case "2.3 Вибухові речовини":
+            case "2.4 Горючі рідини":
+            case "2.3 Тверді горючі речовини":
+            case "2.3 Тверді важкогорючі речовини":
+            case "2.2 Важкогорючі рідини":
+            case "2.2 Негорючі речовини":
+                sendMessage.setText(categories.getCategoryД());
+                messageSender.sendMessage(sendMessage);
+                if (variables.isUsedIndoors()){
+                    sendMessage.setText("Чи є необхідність визначити категорію будівлі?");
+                    sendMessage.setReplyMarkup(inlineButton.inlineDeterminationNecessityCategoriesKeyboard());
+                    messageSender.sendMessage(sendMessage);
+                }
+                break;
+            case "Категорія зовнішньої установки":
+                sendMessage.setText("2. Оберіть вид речовини, що обертається у технологічному процесі");
+                sendMessage.setReplyMarkup(inlineButton.inlineDeterminationTypeOfSubstanceExternalKeyboard());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "Горючі гази З":
+                sendMessage.setText(characteristics.getCharacteristicCombustibleGasesExternal());
+                sendMessage.setReplyMarkup(inlineButton.inlineDeterminationCharacteristicCombustibleGasesExternalKeyboard());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "Легкозаймисті рідини З":
+                sendMessage.setText(characteristics.getCharacteristicFlammableLiquidsExternal());
+                sendMessage.setReplyMarkup(inlineButton.inlineDeterminationCharacteristicFlammableLiquidsExternalKeyboard());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "Вибухові речовини З":
+                sendMessage.setText(characteristics.getCharacteristicExplosiveSubstancesRooms());
+                sendMessage.setReplyMarkup(inlineButton.inlineDeterminationCharacteristicExplosiveSubstancesExternalKeyboard());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "Горючі рідини З":
+                sendMessage.setText(characteristics.getCharacteristicCombustibleLiquidsExternal());
+                sendMessage.setReplyMarkup(inlineButton.inlineDeterminationCharacteristicCombustibleLiquidsExternalKeyboard());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "Горючі пили З":
+                sendMessage.setText(characteristics.getCharacteristicCombustibleSawsExternal());
+                sendMessage.setReplyMarkup(inlineButton.inlineDeterminationCharacteristicCombustibleSawsExternalKeyboard());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "Горючі волокна З":
+                sendMessage.setText(characteristics.getCharacteristicCombustibleFibersExternal());
+                sendMessage.setReplyMarkup(inlineButton.inlineDeterminationCharacteristicCombustibleFibersExternalKeyboard());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "Тверді горючі речовини З":
+                sendMessage.setText(characteristics.getCharacteristicSolidСombustibleSubstancesExternal());
+                sendMessage.setReplyMarkup(inlineButton.inlineDeterminationCharacteristicSolidСombustibleSubstancesExternalKeyboard());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "Тверді важкогорючі речовини З":
+                sendMessage.setText(characteristics.getCharacteristicSolidHighlyFlammableSubstancesExternal());
+                sendMessage.setReplyMarkup(inlineButton.inlineDeterminationCharacteristicSolidHighlyFlammableSubstancesExternalKeyboard());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "Важкогорючі рідини З":
+                sendMessage.setText(characteristics.getCharacteristicHighlyFlammableLiquidExternal());
+                sendMessage.setReplyMarkup(inlineButton.inlineDeterminationCharacteristicHighlyFlammableLiquidExternalKeyboard());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "Негорючі речовини З":
+                sendMessage.setText(characteristics.getCharacteristicNonCombustibleSubstancesExternal());
+                sendMessage.setReplyMarkup(inlineButton.inlineDeterminationCharacteristicNonCombustibleSubstancesExternalKeyboard());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "2.1 Горючі гази З":
+            case "2.1 Легкозаймисті рідини З":
+            case "2.1 Вибухові речовини З":
+                sendMessage.setText(categories.getCategoryАз());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "2.2 Легкозаймисті рідини З":
+            case "2.1 Горючі рідини З":
+            case "2.1 Горючі пили З":
+            case "2.1 Горючі волокна З":
+                sendMessage.setText(categories.getCategoryБз());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "2.2 Горючі гази З":
+            case "2.3 Легкозаймисті рідини З":
+            case "2.2 Вибухові речовини З":
+            case "2.2 Горючі рідини З":
+            case "2.2 Горючі пили З":
+            case "2.2 Горючі волокна З":
+            case "2.1 Тверді горючі речовини З":
+            case "2.1 Тверді важкогорючі речовини З":
+            case "2.1 Важкогорючі рідини З":
+                sendMessage.setText(categories.getCategoryВз());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "2.3 Горючі гази З":
+            case "2.4 Легкозаймисті рідини З":
+            case "2.3 Горючі рідини З":
+            case "2.2 Тверді горючі речовини З":
+            case "2.1 Негорючі речовини З":
+                sendMessage.setText(categories.getCategoryГз());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "2.2 Тверді важкогорючі речовини З":
+            case "2.2 Важкогорючі рідини З":
+            case "2.2 Негорючі речовини З":
+                sendMessage.setText(categories.getCategoryДз());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "Категорія будівлі":
+                sendMessage.setText("1. Надішліть об'єм будівлі та натисніть \" Далі \" ");
+                sendMessage.setReplyMarkup(inlineButton.inlineDeterminationContinueKeyboard());
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "Далі категорія будівлі":
+                if (variables.getData().size() == 0){
+                    sendMessage.setText("Площу не введено");
+                }else{
+                    if (variables.getData().size() == 1) {
+                        sendMessage.setText("Оберіть найнебезпечнішу категорію виробництва");
+                        sendMessage.setReplyMarkup(inlineButton.inlineDeterminationMostDangerousCategoryKeyboard());
+                    }else if(variables.getData().size() == 2 && variables.getCategoryBuildings().equals("А")){
+                        if (categoryBuilding.getBuildingCategoryA() == true){
+                            sendMessage.setText(categories.getCategoryAб());
+                        }else{
+                            sendMessage.setText("Надішліть об'єм приміщень категорії Б та натисніть \" Далі \"");
+                            sendMessage.setReplyMarkup(inlineButton.inlineDeterminationContinueKeyboard());
+                        }
+                    }else if (variables.getData().size() == 3 && variables.getCategoryBuildings().equals("А")){
+                        if (categoryBuilding.getBuildingCategoryA() == true){
+                            sendMessage.setText(categories.getCategoryБб());
+                        }else {
+                            sendMessage.setText("Надішліть об'єм приміщень категорії В та натисніть \" Далі \"");
+                            sendMessage.setReplyMarkup(inlineButton.inlineDeterminationContinueKeyboard());
+                        }
+                    }else if(variables.getData().size() == 4 && variables.getCategoryBuildings().equals("А")){
+                        if (categoryBuilding.getBuildingCategoryA() == true){
+                            sendMessage.setText(categories.getCategoryВб());
+                        }else{
+                            sendMessage.setText("Надішліть об'єм приміщень категорії Г та натисніть \" Далі \"");
+                            sendMessage.setReplyMarkup(inlineButton.inlineDeterminationContinueKeyboard());
+                        }
+                    }else if (variables.getData().size() == 5 && variables.getCategoryBuildings().equals("А")){
+                        if (categoryBuilding.getBuildingCategoryA() == true)sendMessage.setText(categories.getCategoryГб());
+                        else sendMessage.setText(categories.getCategoryДб());
+                    }else if (variables.getData().size() == 2 && variables.getCategoryBuildings().equals("Б")){
+                        if (categoryBuilding.getBuildingCategoryБ() == true) sendMessage.setText(categories.getCategoryБб());
+                        else {
+                            sendMessage.setText("\"Надішліть об'єм приміщень категорії В та натисніть \" Далі \"");
+                            sendMessage.setReplyMarkup(inlineButton.inlineDeterminationContinueKeyboard());
+                        }
+                    }else if (variables.getData().size() == 3 && variables.getCategoryBuildings().equals("Б")){
+                        if (categoryBuilding.getBuildingCategoryБ() == true) sendMessage.setText(categories.getCategoryВб());
+                        else{
+                            sendMessage.setText("Надішліть об'єм приміщень категорії Г та натисніть \" Далі \"");
+                            sendMessage.setReplyMarkup(inlineButton.inlineDeterminationContinueKeyboard());
+                        }
+                    }else if(variables.getData().size() == 4 && variables.getCategoryBuildings().equals("Б")){
+                        if (categoryBuilding.getBuildingCategoryБ() == true) sendMessage.setText(categories.getCategoryГб());
+                        else sendMessage.setText(categories.getCategoryДб());
+                    }else if (variables.getData().size() == 2 && variables.getCategoryBuildings().equals("В")){
+                        if (categoryBuilding.getBuildingCategoryВ() == true) sendMessage.setText(categories.getCategoryВб());
+                        else{
+                            sendMessage.setText("Надішліть об'єм приміщень категорії Г та натисніть \" Далі \"");
+                            sendMessage.setReplyMarkup(inlineButton.inlineDeterminationContinueKeyboard());
+                        }
+                    }else if (variables.getData().size() == 3 && variables.getCategoryBuildings().equals("В")){
+                        if (categoryBuilding.getBuildingCategoryВ() == true) sendMessage.setText(categories.getCategoryГб());
+                        else sendMessage.setText(categories.getCategoryДб());
+                    }else if (variables.getData().size() == 2 && variables.getCategoryBuildings().equals("Г")){
+                        if (categoryBuilding.getBuildingCategoryГ() == true) sendMessage.setText(categories.getCategoryГб());
+                        else sendMessage.setText(categories.getCategoryДб());
+                    }else {
+                        sendMessage.setText("\uD83E\uDD37");
+                    }
+                }
+                messageSender.sendMessage(sendMessage);
+                break;
+            case "А - вибухопожежонебезпечна":
+                sendMessage.setText("Надішліть об'єм приміщень категорії А та натисніть \" Далі \" ");
+                sendMessage.setReplyMarkup(inlineButton.inlineDeterminationContinueKeyboard());
+                messageSender.sendMessage(sendMessage);
+                variables.setCategoryBuildings("А");
+                break;
+            case "Б - вибухопожежонебезпечна":
+                sendMessage.setText("Надішліть об'єм приміщень категорії Б та натисніть \" Далі \" ");
+                sendMessage.setReplyMarkup(inlineButton.inlineDeterminationContinueKeyboard());
+                messageSender.sendMessage(sendMessage);
+                variables.setCategoryBuildings("Б");
+                break;
+            case "В - пожежонебезпечна":
+                sendMessage.setText("Надішліть об'єм приміщень категорії В та натисніть \" Далі \" ");
+                sendMessage.setReplyMarkup(inlineButton.inlineDeterminationContinueKeyboard());
+                messageSender.sendMessage(sendMessage);
+                variables.setCategoryBuildings("В");
+                break;
+            case "Г - помірнопожежонебезпечна":
+                sendMessage.setText("Надішліть об'єм приміщень категорії Г та натисніть \" Далі \" ");
+                sendMessage.setReplyMarkup(inlineButton.inlineDeterminationContinueKeyboard());
+                messageSender.sendMessage(sendMessage);
+                variables.setCategoryBuildings("Г");
+                break;
+            case "Д - зниженопожежонебезпечна":
+                sendMessage.setText(categories.getCategoryД());
+                messageSender.sendMessage(sendMessage);
+                break;
         }
+
+
     }
     String result() { // виводить результат для вогнегасника
         String s6 = null;

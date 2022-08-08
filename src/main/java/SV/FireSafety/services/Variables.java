@@ -4,8 +4,7 @@ import java.util.ArrayList;
 
 public class Variables {
     //розрахункові змінні
-    public static ArrayList<String> data = new ArrayList<String>();
-
+    public  static ArrayList<String> data = new ArrayList<String>();
     private static String comandOfMenu; // зберігає тип обраної команди в меню
     private static String typePremises; // зберігається тип приміщення
     private static String categoryPremises; // зберігається категорія приміщення
@@ -24,6 +23,11 @@ public class Variables {
     private static String typeIndustrialStorageFacility; // зберігає промисловий чи складський об'єкт для визначення ступеня
     // ризику
     private static String levelEmergency; // зберігає рівень надзвичайних ситуацій, що траплялись на об'єкті
+
+    private static String typeResultDegreeRisk; // зберігає значення класу наслідків під час будівництва об'єкту (крайнє значення)
+
+    private static boolean usedIndoors; // зберігає чи використовується технологічна установка в приміщенні
+    private static String categoryBuildings; // зберігає категорію будівлі
 
     public static ArrayList<String> getData() {
         return data;
@@ -161,6 +165,38 @@ public class Variables {
         Variables.typeResultDegreeRisk = typeResultDegreeRisk;
     }
 
-    private static String typeResultDegreeRisk; // зберігає значення класу наслідків під час будівництва об'єкту (крайнє
-    // значення)
+    public static boolean isUsedIndoors() {
+        return usedIndoors;
+    }
+
+    public static void setUsedIndoors(boolean usedIndoors) {
+        Variables.usedIndoors = usedIndoors;
+    }
+
+    public static String getCategoryBuildings() {
+        return categoryBuildings;
+    }
+
+    public static void setCategoryBuildings(String categoryBuildings) {
+        Variables.categoryBuildings = categoryBuildings;
+    }
+
+    public void setVariables(){
+        data.clear();
+        setTypePremises(null);
+        setCategoryPremises(null);
+        setClassFire(null);
+        setTypeExtinguisher(null);
+        setTypeSpacesBuild(null);
+        setB1(false);
+        setB2(false);
+        setCharacteristicsObject(null);
+        setTypeObjectOfRisk(null);
+        setTypeStateOwnedObject(null);
+        setTypeCulturalObject(null);
+        setTypeIndustrialStorageFacility(null);
+        setLevelEmergency(null);
+        setTypeResultDegreeRisk(null);
+        setUsedIndoors(false);
+    }
 }

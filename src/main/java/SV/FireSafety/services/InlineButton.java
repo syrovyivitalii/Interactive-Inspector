@@ -206,7 +206,7 @@ public class InlineButton {
 
 
     // розпочинає роботу бот по визначенню ступеня ризику
-    public InlineKeyboardMarkup inlineDegreeOfRiskStartKeyboard(){
+    public InlineKeyboardMarkup inlineStartKeyboard(){
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
         keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Розпочати").callbackData("Розпочати").build()));
@@ -363,7 +363,284 @@ public class InlineButton {
         return inlineKeyboardMarkup;
     }
 
+    // розпочинає роботу визначення категорій приміщень за пожежною небезпекою
 
+    //обрання характеристики, що необхідно визначити
+    public InlineKeyboardMarkup inlineDeterminationCharacteristicKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("Категорія приміщень, будівель чи зовнішніх установок").callbackData("Категорія Прим./Буд/Зовн.Уст").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("Категорія приміщення").callbackData("Категорія приміщення").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("Категорія зовнішньої установки").callbackData("Категорія зовнішньої установки").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("Категорія будівлі").callbackData("Категорія будівлі").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    //обрання місця розташування технологічної установки
+    public InlineKeyboardMarkup inlineDeterminationLocationKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("Використовується в приміщенні").callbackData("Використовується в прим.").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("Використовується на відкритому повітрі").callbackData("Використовується на вулиці").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    //необхідність визначення категорії будівлі
+    public InlineKeyboardMarkup inlineDeterminationNecessityCategoriesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("Так, є необхідність").callbackData("Так, є необхідність").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("Ні, необхідність відсутня").callbackData("Ні, необхідність відсутня").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    //обрання виду речовини, що обертається у технологічному процесі - категорія приміщення
+    public InlineKeyboardMarkup inlineDeterminationTypeOfSubstanceRoomsKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("Горючі гази").callbackData("Горючі гази").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("Легкозаймисті рідини").callbackData("Легкозаймисті рідини").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("Вибухові/горючі при контакті з іншими речовинами").callbackData("Вибухові речовини").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("Горючі рідини").callbackData("Горючі рідини").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("Горючі пили").callbackData("Горючі пили").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("Горючі волокна").callbackData("Горючі волокна").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("Тверді горючі речовини").callbackData("Тверді горючі речовини").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("Тверді важкогорючі речовини").callbackData("Тверді важкогорючі речовини").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("Важкогорючі рідини").callbackData("Важкогорючі рідини").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("Негорючі речовини").callbackData("Негорючі речовини").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    // характеристика горючих газів, категорія приміщення
+    public InlineKeyboardMarkup inlineDeterminationCharacteristicCombustibleGasesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.1").callbackData("2.1 Горючі гази").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.2").callbackData("2.2 Горючі гази").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.3").callbackData("2.3 Горючі гази").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    // характеристика легкозаймистих рідин, категорія приміщення
+    public InlineKeyboardMarkup inlineDeterminationCharacteristicFlammableLiquidsKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.1").callbackData("2.1 Легкозаймисті рідини").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.2").callbackData("2.2 Легкозаймисті рідини").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.3").callbackData("2.3 Легкозаймисті рідини").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.4").callbackData("2.4 Легкозаймисті рідини").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.5").callbackData("2.5 Легкозаймисті рідини").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    //характеристика речовин і матеріалів, які здатні вибухати і/або горіти при взаємодії з іншими речовинами, категорія приміщення
+    public InlineKeyboardMarkup inlineDeterminationCharacteristicExplosiveSubstancesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.1").callbackData("2.1 Вибухові речовини").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.2").callbackData("2.2 Вибухові речовини").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.3").callbackData("2.3 Вибухові речовини").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    // характеристика горючих рідин, категорія приміщення
+    public InlineKeyboardMarkup inlineDeterminationCharacteristicCombustibleLiquidsKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.1").callbackData("2.1 Горючі рідини").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.2").callbackData("2.2 Горючі рідини").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.3").callbackData("2.3 Горючі рідини").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.4").callbackData("2.4 Горючі рідини").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    // характеристика горючого пилу, категорія приміщення
+    public InlineKeyboardMarkup inlineDeterminationCharacteristicCombustibleSawsKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.1").callbackData("2.1 Горючі пили").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.2").callbackData("2.2 Горючі пили").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    // характеристика горючих волокон, категорія приміщення
+    public InlineKeyboardMarkup inlineDeterminationCharacteristicCombustibleFibersKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.1").callbackData("2.1 Горючі волокна").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.2").callbackData("2.2 Горючі волокна").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    //характеристика тверді горючі речовини, категорія приміщення
+    public InlineKeyboardMarkup inlineDeterminationCharacteristicSolidСombustibleSubstancesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.1").callbackData("2.1 Тверді горючі речовини").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.2").callbackData("2.2 Тверді горючі речовини").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.3").callbackData("2.3 Тверді горючі речовини").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    //характеристика тверді важкогорючі речовини, категорія приміщення
+    public InlineKeyboardMarkup inlineDeterminationCharacteristicSolidHighlyFlammableSubstancesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.1").callbackData("2.1 Тверді важкогорючі речовини").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.2").callbackData("2.2 Тверді важкогорючі речовини").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.3").callbackData("2.3 Тверді важкогорючі речовини").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    //характеристика важкогорючі рідини, категорія приміщення
+    public InlineKeyboardMarkup inlineDeterminationCharacteristicHighlyFlammableLiquidKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.1").callbackData("2.1 Важкогорючі рідини").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.2").callbackData("2.2 Важкогорючі рідини").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    // характеристика негорючих речовин, категорія приміщення
+    public InlineKeyboardMarkup inlineDeterminationCharacteristicNonCombustibleSubstancesKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.1").callbackData("2.1 Негорючі речовини").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.2").callbackData("2.2 Негорючі речовини").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    //обрання виду речовини, що обертається у технологічному процесі,  категорія - зовнішньої установки
+    public InlineKeyboardMarkup inlineDeterminationTypeOfSubstanceExternalKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("Горючі гази").callbackData("Горючі гази З").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("Легкозаймисті рідини").callbackData("Легкозаймисті рідини З").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("Вибухові/горючі при контакті з іншими речовинами").callbackData("Вибухові речовини З").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("Горючі рідини").callbackData("Горючі рідини З").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("Горючі пили").callbackData("Горючі пили З").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("Горючі волокна").callbackData("Горючі волокна З").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("Тверді горючі речовини").callbackData("Тверді горючі речовини З").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("Тверді важкогорючі речовини").callbackData("Тверді важкогорючі речовини З").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("Важкогорючі рідини").callbackData("Важкогорючі рідини З").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("Негорючі речовини").callbackData("Негорючі речовини З").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    // характеристика горючих газів, категорія зовнішньої установки
+    public InlineKeyboardMarkup inlineDeterminationCharacteristicCombustibleGasesExternalKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.1").callbackData("2.1 Горючі гази З").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.2").callbackData("2.2 Горючі гази З").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.3").callbackData("2.3 Горючі гази З").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    // характеристика легкозаймистих рідин, категорія зовнішньої установки
+    public InlineKeyboardMarkup inlineDeterminationCharacteristicFlammableLiquidsExternalKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.1").callbackData("2.1 Легкозаймисті рідини З").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.2").callbackData("2.2 Легкозаймисті рідини З").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.3").callbackData("2.3 Легкозаймисті рідини З").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.4").callbackData("2.4 Легкозаймисті рідини З").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    //характеристика речовин і матеріалів, які здатні вибухати і/або горіти при взаємодії з іншими речовинами, категорія зовнішньої установки
+    public InlineKeyboardMarkup inlineDeterminationCharacteristicExplosiveSubstancesExternalKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.1").callbackData("2.1 Вибухові речовини З").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.2").callbackData("2.2 Вибухові речовини З").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    // характеристика горючих рідин, категорія зовнішньої установки
+    public InlineKeyboardMarkup inlineDeterminationCharacteristicCombustibleLiquidsExternalKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.1").callbackData("2.1 Горючі рідини З").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.2").callbackData("2.2 Горючі рідини З").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.3").callbackData("2.3 Горючі рідини З").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    // характеристика горючого пилу, категорія зовнішньої установки
+    public InlineKeyboardMarkup inlineDeterminationCharacteristicCombustibleSawsExternalKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.1").callbackData("2.1 Горючі пили З").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.2").callbackData("2.2 Горючі пили З").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    // характеристика горючих волокон, категорія зовнішньої установки
+    public InlineKeyboardMarkup inlineDeterminationCharacteristicCombustibleFibersExternalKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.1").callbackData("2.1 Горючі волокна З").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.2").callbackData("2.2 Горючі волокна З").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    //характеристика тверді горючі речовини, категорія зовнішньої установки
+    public InlineKeyboardMarkup inlineDeterminationCharacteristicSolidСombustibleSubstancesExternalKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.1").callbackData("2.1 Тверді горючі речовини З").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.2").callbackData("2.2 Тверді горючі речовини З").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    //характеристика тверді важкогорючі речовини, категорія зовнішньої установки
+    public InlineKeyboardMarkup inlineDeterminationCharacteristicSolidHighlyFlammableSubstancesExternalKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.1").callbackData("2.1 Тверді важкогорючі речовини З").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.2").callbackData("2.2 Тверді важкогорючі речовини З").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    //характеристика важкогорючі рідини, категорія зовнішньої установки
+    public InlineKeyboardMarkup inlineDeterminationCharacteristicHighlyFlammableLiquidExternalKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.1").callbackData("2.1 Важкогорючі рідини З").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.2").callbackData("2.2 Важкогорючі рідини З").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    // характеристика негорючих речовин, категорія зовнішньої установки
+    public InlineKeyboardMarkup inlineDeterminationCharacteristicNonCombustibleSubstancesExternalKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.1").callbackData("2.1 Негорючі речовини З").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.2").callbackData("2.2 Негорючі речовини З").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+
+    // клавіатура "Далі" після надіслання об'єму будівлі
+    public InlineKeyboardMarkup inlineDeterminationContinueKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("Далі").callbackData("Далі категорія будівлі").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
+    public InlineKeyboardMarkup inlineDeterminationMostDangerousCategoryKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("А - вибухопожежонебезпечна").callbackData("А - вибухопожежонебезпечна").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("Б - вибухопожежонебезпечна").callbackData("Б - вибухопожежонебезпечна").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("В - пожежонебезпечна").callbackData("В - пожежонебезпечна").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("Г - помірнопожежонебезпечна").callbackData("Г - помірнопожежонебезпечна").build()));
+        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("Д - зниженопожежонебезпечна").callbackData("Д - зниженопожежонебезпечна").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
 
 
 }
