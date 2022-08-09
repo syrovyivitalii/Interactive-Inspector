@@ -478,7 +478,6 @@ public class InlineButton {
         List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
         keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.1").callbackData("2.1 Тверді горючі речовини").build()));
         keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.2").callbackData("2.2 Тверді горючі речовини").build()));
-        keyboard.add(Arrays.asList(InlineKeyboardButton.builder().text("2.3").callbackData("2.3 Тверді горючі речовини").build()));
         inlineKeyboardMarkup.setKeyboard(keyboard);
         return inlineKeyboardMarkup;
     }

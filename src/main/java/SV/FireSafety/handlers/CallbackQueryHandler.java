@@ -1109,7 +1109,7 @@ public class CallbackQueryHandler implements Handler<CallbackQuery> {
                 messageSender.sendMessage(sendMessage);
                 break;
             case "Горючі волокна":
-                sendMessage.setText(s4);
+                sendMessage.setText(characteristics.getCharacteristicCombustibleFibersRooms());
                 sendMessage.setReplyMarkup(inlineButton.inlineDeterminationCharacteristicCombustibleFibersKeyboard());
                 messageSender.sendMessage(sendMessage);
                 break;
