@@ -1,7 +1,13 @@
 package SV.FireSafety.services;
 
 public class CategoryBuilding {
-    Variables variables = new Variables();
+    DBWorker dbWorker = new DBWorker();
+    String chatID;
+
+    public CategoryBuilding(String chatID) {
+        this.chatID = chatID;
+    }
+
     double volumeBuilding;
     double volumeRoomA;
     double volumeRoomБ;
@@ -10,33 +16,33 @@ public class CategoryBuilding {
     double result;
 
     private boolean buildingsCategoryA(){
-        if (variables.getData().size() == 2) {
-            volumeBuilding = Double.parseDouble(variables.getData().get(0));
-            volumeRoomA = Double.parseDouble(variables.getData().get(1));
+        if (dbWorker.getVolumeRoomsA(chatID)!=null) {
+            volumeBuilding = Double.parseDouble(dbWorker.getVolumePremises(chatID));
+            volumeRoomA = Double.parseDouble(dbWorker.getVolumeRoomsA(chatID));
             result = (volumeRoomA / volumeBuilding) * 100;
             if (result >= 5) return true;
             else return false;
-        }else if (variables.getData().size() == 3 ){
-            volumeBuilding = Double.parseDouble(variables.getData().get(0));
-            volumeRoomA = Double.parseDouble(variables.getData().get(1));
-            volumeRoomБ = Double.parseDouble(variables.getData().get(2));
+        }else if (dbWorker.getVolumeRoomsБ(chatID)!=null ){
+            volumeBuilding = Double.parseDouble(dbWorker.getVolumePremises(chatID));
+            volumeRoomA = Double.parseDouble(dbWorker.getVolumeRoomsA(chatID));
+            volumeRoomБ = Double.parseDouble(dbWorker.getVolumeRoomsБ(chatID));
             result = (volumeRoomA + volumeRoomБ)/volumeBuilding * 100;
             if (result >=5) return true;
             else return false;
-        }else if (variables.getData().size() == 4){
-            volumeBuilding = Double.parseDouble(variables.getData().get(0));
-            volumeRoomA = Double.parseDouble(variables.getData().get(1));
-            volumeRoomБ = Double.parseDouble(variables.getData().get(2));
-            volumeRoomВ = Double.parseDouble(variables.getData().get(3));
+        }else if (dbWorker.getVolumeRoomsB(chatID) !=null){
+            volumeBuilding = Double.parseDouble(dbWorker.getVolumePremises(chatID));
+            volumeRoomA = Double.parseDouble(dbWorker.getVolumeRoomsA(chatID));
+            volumeRoomБ = Double.parseDouble(dbWorker.getVolumeRoomsБ(chatID));
+            volumeRoomВ = Double.parseDouble(dbWorker.getVolumeRoomsB(chatID));
             result = (volumeRoomA + volumeRoomБ + volumeRoomВ)/volumeBuilding*100;
             if (result >= 5) return true;
             else return false;
         }else{
-            volumeBuilding = Double.parseDouble(variables.getData().get(0));
-            volumeRoomA = Double.parseDouble(variables.getData().get(1));
-            volumeRoomБ = Double.parseDouble(variables.getData().get(2));
-            volumeRoomВ = Double.parseDouble(variables.getData().get(3));
-            volumeRoomГ = Double.parseDouble(variables.getData().get(4));
+            volumeBuilding = Double.parseDouble(dbWorker.getVolumePremises(chatID));
+            volumeRoomA = Double.parseDouble(dbWorker.getVolumeRoomsA(chatID));
+            volumeRoomБ = Double.parseDouble(dbWorker.getVolumeRoomsБ(chatID));
+            volumeRoomВ = Double.parseDouble(dbWorker.getVolumeRoomsB(chatID));
+            volumeRoomГ = Double.parseDouble(dbWorker.getVolumeRoomsГ(chatID));
             result = (volumeRoomA + volumeRoomБ + volumeRoomВ + volumeRoomГ)/volumeBuilding*100;
             if (result >= 5) return true;
             else return false;
@@ -46,24 +52,24 @@ public class CategoryBuilding {
         return buildingsCategoryA();
     }
     private boolean buildingsCategoryБ(){
-        if (variables.getData().size() == 2) {
-            volumeBuilding = Double.parseDouble(variables.getData().get(0));
-            volumeRoomБ = Double.parseDouble(variables.getData().get(1));
+        if (dbWorker.getVolumeRoomsБ(chatID)!=null) {
+            volumeBuilding = Double.parseDouble(dbWorker.getVolumePremises(chatID));
+            volumeRoomБ = Double.parseDouble(dbWorker.getVolumeRoomsБ(chatID));
             result = (volumeRoomБ / volumeBuilding) * 100;
             if (result >= 5) return true;
             else return false;
-        }else if (variables.getData().size() == 3 ){
-            volumeBuilding = Double.parseDouble(variables.getData().get(0));
-            volumeRoomБ = Double.parseDouble(variables.getData().get(1));
-            volumeRoomВ = Double.parseDouble(variables.getData().get(2));
+        }else if (dbWorker.getVolumeRoomsB(chatID)!=null){
+            volumeBuilding = Double.parseDouble(dbWorker.getVolumePremises(chatID));
+            volumeRoomБ = Double.parseDouble(dbWorker.getVolumeRoomsБ(chatID));
+            volumeRoomВ = Double.parseDouble(dbWorker.getVolumeRoomsB(chatID));
             result = (volumeRoomБ + volumeRoomВ)/volumeBuilding * 100;
             if (result >=5) return true;
             else return false;
         }else{
-            volumeBuilding = Double.parseDouble(variables.getData().get(0));
-            volumeRoomБ = Double.parseDouble(variables.getData().get(1));
-            volumeRoomВ = Double.parseDouble(variables.getData().get(2));
-            volumeRoomГ = Double.parseDouble(variables.getData().get(3));
+            volumeBuilding = Double.parseDouble(dbWorker.getVolumePremises(chatID));
+            volumeRoomБ = Double.parseDouble(dbWorker.getVolumeRoomsБ(chatID));
+            volumeRoomВ = Double.parseDouble(dbWorker.getVolumeRoomsB(chatID));
+            volumeRoomГ = Double.parseDouble(dbWorker.getVolumeRoomsГ(chatID));
             result = (volumeRoomБ + volumeRoomВ + volumeRoomГ)/volumeBuilding*100;
             if (result >= 5) return true;
             else return false;
@@ -73,16 +79,16 @@ public class CategoryBuilding {
         return buildingsCategoryБ();
     }
     private boolean buildingsCategoryВ(){
-        if (variables.getData().size() == 2) {
-            volumeBuilding = Double.parseDouble(variables.getData().get(0));
-            volumeRoomВ = Double.parseDouble(variables.getData().get(1));
+        if (dbWorker.getVolumeRoomsB(chatID)!=null) {
+            volumeBuilding = Double.parseDouble(dbWorker.getVolumePremises(chatID));
+            volumeRoomВ = Double.parseDouble(dbWorker.getVolumeRoomsB(chatID));
             result = (volumeRoomВ / volumeBuilding) * 100;
             if (result >= 5) return true;
             else return false;
         }else{
-            volumeBuilding = Double.parseDouble(variables.getData().get(0));
-            volumeRoomВ = Double.parseDouble(variables.getData().get(1));
-            volumeRoomГ = Double.parseDouble(variables.getData().get(2));
+            volumeBuilding = Double.parseDouble(dbWorker.getVolumePremises(chatID));
+            volumeRoomВ = Double.parseDouble(dbWorker.getVolumeRoomsB(chatID));
+            volumeRoomГ = Double.parseDouble(dbWorker.getVolumeRoomsГ(chatID));
             result = (volumeRoomВ + volumeRoomГ)/volumeBuilding * 100;
             if (result >=5) return true;
             else return false;
@@ -92,8 +98,8 @@ public class CategoryBuilding {
         return buildingsCategoryВ();
     }
     private boolean buildingsCategoryГ(){
-            volumeBuilding = Double.parseDouble(variables.getData().get(0));
-            volumeRoomГ = Double.parseDouble(variables.getData().get(1));
+            volumeBuilding = Double.parseDouble(dbWorker.getVolumePremises(chatID));
+            volumeRoomГ = Double.parseDouble(dbWorker.getVolumeRoomsГ(chatID));
             result = (volumeRoomГ / volumeBuilding) * 100;
             if (result >= 5) return true;
             else return false;

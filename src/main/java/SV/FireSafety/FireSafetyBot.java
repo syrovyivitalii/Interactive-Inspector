@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Update;
+
+
 @Component
 public class FireSafetyBot extends TelegramLongPollingBot {
     private Processor processor;
@@ -23,8 +25,10 @@ public class FireSafetyBot extends TelegramLongPollingBot {
     public void onUpdateReceived(Update update) {
         processor.process(update);
     }
+
     @Autowired
     public void setProcessor(Processor processor){
         this.processor = processor;
     }
+
 }

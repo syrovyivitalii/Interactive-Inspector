@@ -1,18 +1,20 @@
 package SV.FireSafety.services;
 
-import SV.FireSafety.handlers.CallbackQueryHandler;
+public class IndustrialPremises{
+    String chatID;
 
-public class IndustrialPremises extends Variables{
+    public IndustrialPremises(String chatID) {
+        this.chatID = chatID;
+    }
+
+    DBWorker dbWorker = new DBWorker();
 
     int array[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
     //	int arrayDemo [] = {ВП_5, ВП_6, ВП_8, ВП_9, ВП_12, ВП_20, ВП_50, ВП_100, ВП_150};
     double square() {
-        if (getData().isEmpty() == false) {
-            return Double.parseDouble(getData().get(0));
-        } else {
-            return 0;
-        }
+        double square = Double.parseDouble(dbWorker.getSquare(chatID));
+        return square;
     }
 
     String transformation(int vp) {
@@ -28,11 +30,11 @@ public class IndustrialPremises extends Variables{
         String s = null;
         double n = square() / 1000;
         double nLeft = square() % 1000;
-        if ((getCategoryPremises() == "Категорія А" || getCategoryPremises() == "Категорія Б"
-                || getCategoryPremises() == "Категорія В з ГГ")
-                && (getClassFire() == "Клас пожежі A" || getClassFire() == "Клас пожежі B" || getClassFire() == "Клас пожежі C"
-                || getClassFire() == "Клас пожежі E")
-                && getTypeExtinguisher() == "порошковий") {
+        if ((dbWorker.getCategoryPremises(chatID).equals("Категорія А") || dbWorker.getCategoryPremises(chatID).equals("Категорія Б")
+                || dbWorker.getCategoryPremises(chatID).equals("Категорія В з ГГ"))
+                && (dbWorker.getClassFire(chatID).equals("Клас пожежі A") || dbWorker.getClassFire(chatID).equals("Клас пожежі B") || dbWorker.getClassFire(chatID).equals("Клас пожежі C")
+                || dbWorker.getClassFire(chatID).equals("Клас пожежі E"))
+                && dbWorker.getTypeExtinguisher(chatID).equals("порошковий")) {
             if (square()<= 25) {
                 array[0] = 2;
                 array[1] = 2;
@@ -185,8 +187,8 @@ public class IndustrialPremises extends Variables{
                 }
             }
 
-        } else if (getCategoryPremises() == "Категорія В без ГГ"
-                && (getClassFire() == "Клас пожежі A" || getClassFire() == "Клас пожежі E") && getTypeExtinguisher() == "порошковий") {
+        } else if (dbWorker.getCategoryPremises(chatID).equals("Категорія В без ГГ")
+                && (dbWorker.getClassFire(chatID).equals("Клас пожежі A") || dbWorker.getClassFire(chatID) .equals("Клас пожежі E")) && dbWorker.getTypeExtinguisher(chatID).equals("порошковий")) {
             if (square ()<= 50) {
                 array[0] = 2;
                 array[1] = 2;
@@ -330,8 +332,8 @@ public class IndustrialPremises extends Variables{
                             + "\n" + "3. ВП-100 - " + transformation(array[7]) + "\n";
                 }
             }
-        } else if (getCategoryPremises() == "Категорія Г" && (getClassFire() == "Клас пожежі B" || getClassFire() == "Клас пожежі C")
-                && getTypeExtinguisher() == "порошковий") {
+        } else if (dbWorker.getCategoryPremises(chatID).equals("Категорія Г") && (dbWorker.getClassFire(chatID).equals("Клас пожежі B") || dbWorker.getClassFire(chatID).equals("Клас пожежі C"))
+                && dbWorker.getTypeExtinguisher(chatID).equals("порошковий")) {
             if (square() <= 50) {
                 array[0] = 2;
                 array[1] = 2;
@@ -467,8 +469,8 @@ public class IndustrialPremises extends Variables{
                             + "ВП-5 - 7 од. або ВП-6 - 7 од. або ВП-8 - 4 од. або ВП-9 - 4 од. або ВП-12 - 3 од.";
                 }
             }
-        } else if ((getCategoryPremises() == "Категорія Г" || getCategoryPremises() == "Категорія Д")
-                && (getClassFire() == "Клас пожежі A" || getClassFire() == "Клас пожежі E") && getTypeExtinguisher() == "порошковий") {
+        } else if ((dbWorker.getCategoryPremises(chatID).equals("Категорія Г") || dbWorker.getCategoryPremises(chatID).equals("Категорія Д"))
+                && (dbWorker.getClassFire(chatID).equals("Клас пожежі A") || dbWorker.getClassFire(chatID).equals("Клас пожежі E")) && dbWorker.getTypeExtinguisher(chatID).equals("порошковий")) {
             if (square ()<= 50) {
                 array[0] = 2;
                 array[1] = 2;
@@ -578,10 +580,10 @@ public class IndustrialPremises extends Variables{
                             + "ВП-5 - 4 од. або ВП-6 - 4 од. або ВП-8 - 3 од. або ВП-9 - 3 од. або ВП-12 - 2 од.";
                 }
             }
-        } else if ((getCategoryPremises() == "Категорія А" || getCategoryPremises() == "Категорія Б"
-                || getCategoryPremises() == "Категорія В з ГГ" || getCategoryPremises() == "Категорія В без ГГ"
-                || getCategoryPremises() == "Категорія Г" || getCategoryPremises() == "Категорія Д")
-                && getClassFire() == "Клас пожежі D" && getTypeExtinguisher() == "порошковий") {
+        } else if ((dbWorker.getCategoryPremises(chatID).equals("Категорія А") || dbWorker.getCategoryPremises(chatID).equals("Категорія Б")
+                || dbWorker.getCategoryPremises(chatID).equals("Категорія В з ГГ") || dbWorker.getCategoryPremises(chatID).equals("Категорія В без ГГ")
+                || dbWorker.getCategoryPremises(chatID).equals("Категорія Г") || dbWorker.getCategoryPremises(chatID).equals("Категорія Д"))
+                && dbWorker.getClassFire(chatID).equals("Клас пожежі D") && dbWorker.getTypeExtinguisher(chatID).equals("порошковий")) {
             s = "🧯 Оснащення порошковими вогнегасниками для гасіння пожеж класу D слід проводити з дотриманням галузевих норм, погоджених у встановленому порядку";
         }
         return s;
@@ -591,9 +593,9 @@ public class IndustrialPremises extends Variables{
         String s = null;
         double n = square() / 1000;
         double nLeft = square() % 1000;
-        if ((getCategoryPremises() == "Категорія А" || getCategoryPremises() == "Категорія Б"
-                || getCategoryPremises() == "Категорія В з ГГ") && getClassFire() == "Клас пожежі A"
-                && getTypeExtinguisher() == "водопінний") {
+        if ((dbWorker.getCategoryPremises(chatID).equals("Категорія А") || dbWorker.getCategoryPremises(chatID).equals("Категорія Б")
+                || dbWorker.getCategoryPremises(chatID).equals("Категорія В з ГГ")) && dbWorker.getClassFire(chatID).equals("Клас пожежі A")
+                && dbWorker.getTypeExtinguisher(chatID).equals("водопінний")) {
             if (square() <= 25) {
                 array[0] = 4;
                 array[1] = 4;
@@ -708,9 +710,9 @@ public class IndustrialPremises extends Variables{
                             + "ВВП-9 - 8 од. або ВВП-12 - 6 од.";
                 }
             }
-        } else if ((getCategoryPremises() == "Категорія А" || getCategoryPremises() == "Категорія Б"
-                || getCategoryPremises() == "Категорія В з ГГ") && getClassFire() == "Клас пожежі B"
-                && getTypeExtinguisher() == "водопінний") {
+        } else if ((dbWorker.getCategoryPremises(chatID).equals("Категорія А") || dbWorker.getCategoryPremises(chatID).equals("Категорія Б")
+                || dbWorker.getCategoryPremises(chatID).equals("Категорія В з ГГ")) && dbWorker.getClassFire(chatID).equals("Клас пожежі B")
+                && dbWorker.getTypeExtinguisher(chatID).equals("водопінний")) {
             if (square ()<= 25) {
                 array[0] = 3;
                 array[1] = 3;
@@ -825,8 +827,8 @@ public class IndustrialPremises extends Variables{
                             + "ВВП-9 - 7 од. або ВВП-12 - 4 од.";
                 }
             }
-        } else if (getCategoryPremises() == "Категорія В без ГГ" && getClassFire() == "Клас пожежі A"
-                && getTypeExtinguisher() == "водопінний") {
+        } else if (dbWorker.getCategoryPremises(chatID).equals("Категорія В без ГГ") && dbWorker.getClassFire(chatID).equals("Клас пожежі A")
+                && dbWorker.getTypeExtinguisher(chatID).equals("водопінний")) {
             if (square ()> 0 && square ()<= 50) {
                 array[0] = 4;
                 array[1] = 4;
@@ -949,8 +951,8 @@ public class IndustrialPremises extends Variables{
                             + "ВВП-9 - 8 од. або ВВП-12 - 6 од.";
                 }
             }
-        } else if (getCategoryPremises() == "Категорія Г" && getClassFire() == "Клас пожежі B"
-                && getTypeExtinguisher() == "водопінний") {
+        } else if (dbWorker.getCategoryPremises(chatID).equals("Категорія Г") && dbWorker.getClassFire(chatID).equals("Клас пожежі B")
+                && dbWorker.getTypeExtinguisher(chatID).equals("водопінний")) {
             if (square ()> 0 && square() <= 50) {
                 array[0] = 3;
                 array[1] = 3;
@@ -1075,8 +1077,8 @@ public class IndustrialPremises extends Variables{
                             + "ВВП-5 - 11 од. або ВВП-6 - 11 од. абоВВП-9 - 7 од. або ВВП-12 - 4 од.";
                 }
             }
-        } else if ((getCategoryPremises() == "Категорія Г" || getCategoryPremises() == "Категорія Д")
-                && getClassFire() == "Клас пожежі A" && getTypeExtinguisher() == "водопінний") {
+        } else if ((dbWorker.getCategoryPremises(chatID) == "Категорія Г" || dbWorker.getCategoryPremises(chatID) == "Категорія Д")
+                && dbWorker.getClassFire(chatID) == "Клас пожежі A" && dbWorker.getTypeExtinguisher(chatID) == "водопінний") {
             if (square ()> 0 && square ()<= 50) {
                 array[0] = 4;
                 array[1] = 4;
@@ -1194,9 +1196,9 @@ public class IndustrialPremises extends Variables{
         String s = null;
         double n = square() / 1000;
         double nLeft = square() % 1000;
-        if ((getCategoryPremises() == "Категорія А" || getCategoryPremises() == "Категорія Б"
-                || getCategoryPremises() == "Категорія В з ГГ") && getClassFire() == "Клас пожежі A"
-                && getTypeExtinguisher() == "водяний") {
+        if ((dbWorker.getCategoryPremises(chatID).equals("Категорія А") || dbWorker.getCategoryPremises(chatID).equals("Категорія Б")
+                || dbWorker.getCategoryPremises(chatID).equals("Категорія В з ГГ")) && dbWorker.getClassFire(chatID).equals("Клас пожежі A")
+                && dbWorker.getTypeExtinguisher(chatID).equals("водяний")) {
             if (square() <= 25) {
                 array[0] = 4;
                 array[1] = 4;
@@ -1312,9 +1314,9 @@ public class IndustrialPremises extends Variables{
                             + "ВВ-9 - 8 од. або ВВ-12 - 6 од.";
                 }
             }
-        } else if ((getCategoryPremises() == "Категорія А" || getCategoryPremises() == "Категорія Б"
-                || getCategoryPremises() == "Категорія В з ГГ") && getClassFire() == "Клас пожежі B"
-                && getTypeExtinguisher() == "водяний") {
+        } else if ((dbWorker.getCategoryPremises(chatID).equals("Категорія А") || dbWorker.getCategoryPremises(chatID).equals("Категорія Б")
+                || dbWorker.getCategoryPremises(chatID).equals("Категорія В з ГГ")) && dbWorker.getClassFire(chatID).equals("Клас пожежі B")
+                && dbWorker.getTypeExtinguisher(chatID).equals("водяний")) {
             if (square() <= 25) {
                 array[0] = 3;
                 array[1] = 3;
@@ -1432,8 +1434,8 @@ public class IndustrialPremises extends Variables{
                             + "ВВ-9 - 7 од. або ВВ-12 - 4 од." + "\n";
                 }
             }
-        } else if (getCategoryPremises() == "Категорія В без ГГ" && getClassFire() == "Клас пожежі A"
-                && getTypeExtinguisher() == "водяний") {
+        } else if (dbWorker.getCategoryPremises(chatID).equals("Категорія В без ГГ") && dbWorker.getClassFire(chatID).equals("Клас пожежі A")
+                && dbWorker.getTypeExtinguisher(chatID).equals("водяний")) {
             if (square() > 0 && square() <= 50) {
                 array[0] = 4;
                 array[1] = 4;
@@ -1556,7 +1558,7 @@ public class IndustrialPremises extends Variables{
                             + "ВВ-9 - 8 од. або ВВ-12 - 6 од.";
                 }
             }
-        } else if (getCategoryPremises() == "Категорія Г" && getClassFire() == "Клас пожежі B" && getTypeExtinguisher() == "водяний") {
+        } else if (dbWorker.getCategoryPremises(chatID).equals("Категорія Г") && dbWorker.getClassFire(chatID).equals("Клас пожежі B") && dbWorker.getTypeExtinguisher(chatID).equals("водяний")) {
             if (square() > 0 && square() <= 50) {
                 array[0] = 3;
                 array[1] = 3;
@@ -1683,8 +1685,8 @@ public class IndustrialPremises extends Variables{
                             + "ВВ-5 - 11 од. або ВВ-6 - 11 од. або ВВ-9 - 7 од. або ВВ-12 - 4 од.";
                 }
             }
-        } else if ((getCategoryPremises() == "Категорія Г" || getCategoryPremises() == "Категорія Д")
-                && getClassFire() == "Клас пожежі A" && getTypeExtinguisher() == "водяний") {
+        } else if ((dbWorker.getCategoryPremises(chatID).equals("Категорія Г") || dbWorker.getCategoryPremises(chatID).equals("Категорія Д"))
+                && dbWorker.getClassFire(chatID).equals("Клас пожежі A") && dbWorker.getTypeExtinguisher(chatID).equals("водяний")) {
             if (square() > 0 && square() <= 50) {
                 array[0] = 4;
                 array[1] = 4;
@@ -1794,10 +1796,10 @@ public class IndustrialPremises extends Variables{
                             + "ВВ-5 - 12 од. або ВВ-6 - 12 од. або ВВ-9 - 6 од. або ВВ-12 - 4 од.";
                 }
             }
-        } else if ((getCategoryPremises() == "Категорія А" || getCategoryPremises() == "Категорія Б"
-                || getCategoryPremises() == "Категорія В з ГГ" || getCategoryPremises() == "Категорія В без ГГ"
-                || getCategoryPremises() == "Категорія Г" || getCategoryPremises() == "Категорія Д")
-                && getClassFire() == "Клас пожежі F" && getTypeExtinguisher() == "водяний") {
+        } else if ((dbWorker.getCategoryPremises(chatID).equals("Категорія А") || dbWorker.getCategoryPremises(chatID).equals("Категорія Б")
+                || dbWorker.getCategoryPremises(chatID).equals("Категорія В з ГГ") || dbWorker.getCategoryPremises(chatID).equals("Категорія В без ГГ")
+                || dbWorker.getCategoryPremises(chatID).equals("Категорія Г") || dbWorker.getCategoryPremises(chatID).equals("Категорія Д"))
+                && dbWorker.getClassFire(chatID).equals("Клас пожежі F") && dbWorker.getTypeExtinguisher(chatID).equals("водяний")) {
             s = "🧯 Оснащення водяними вогнегасниками, що містять воду з сольовими добавками для гасіння пожеж класу F, слід проводити з дотриманням галузевих норм, погоджених у встановленому порядку";
         }
 
@@ -1809,9 +1811,9 @@ public class IndustrialPremises extends Variables{
         String s = null;
         double n = square() / 1000;
         double nLeft = square() % 1000;
-        if ((getCategoryPremises() == "Категорія А" || getCategoryPremises() == "Категорія Б"
-                || getCategoryPremises() == "Категорія В з ГГ")
-                && (getClassFire() == "Клас пожежі B" || getClassFire() == "Клас пожежі E") && getTypeExtinguisher() == "газовий") {
+        if ((dbWorker.getCategoryPremises(chatID).equals("Категорія А") || dbWorker.getCategoryPremises(chatID).equals("Категорія Б")
+                || dbWorker.getCategoryPremises(chatID).equals("Категорія В з ГГ"))
+                && (dbWorker.getClassFire(chatID).equals("Клас пожежі B") || dbWorker.getClassFire(chatID).equals("Клас пожежі E")) && dbWorker.getTypeExtinguisher(chatID).equals("газовий")) {
             if (square() <= 25) {
                 array[0] = 4;
                 array[1] = 4;
@@ -1906,8 +1908,8 @@ public class IndustrialPremises extends Variables{
                             + "ВВК-7 - 4 од. або ВВК-14 - 3 од.";
                 }
             }
-        } else if (getCategoryPremises() == "Категорія Г" && (getClassFire() == "Клас пожежі B" || getClassFire() == "Клас пожежі E")
-                && getTypeExtinguisher() == "газовий") {
+        } else if (dbWorker.getCategoryPremises(chatID).equals("Категорія Г") && (dbWorker.getClassFire(chatID).equals("Клас пожежі B") || dbWorker.getClassFire(chatID).equals("Клас пожежі E"))
+                && dbWorker.getTypeExtinguisher(chatID).equals("газовий")) {
             if (square() > 0 && square() <= 50) {
                 array[0] = 4;
                 array[1] = 4;

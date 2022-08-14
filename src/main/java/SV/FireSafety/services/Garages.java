@@ -1,14 +1,18 @@
 package SV.FireSafety.services;
 
-public class Garages extends Variables {
+public class Garages {
+    String chatID;
+    public Garages(String chatID) {
+        this.chatID = chatID;
+    }
+
+    DBWorker dbWorker = new DBWorker();
+
     double array[] = { 1, 1, 2, 2 };
 
     double numberСarSeats() {
-        if (getData().isEmpty() == false) {
-            return Double.parseDouble(getData().get(0));
-        } else {
-            return 0;
-        }
+        double seats = Double.parseDouble(dbWorker.getParking(chatID));
+        return seats;
     }
 
     public String quantityExtinguisherGarages() {

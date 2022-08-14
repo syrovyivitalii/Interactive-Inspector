@@ -257,6 +257,14 @@ public class InlineButton {
         inlineKeyboardMarkup.setKeyboard(keyboard);
         return inlineKeyboardMarkup;
     }
+    // метод викликає сповіщення щоб ввести площу об'єкта і натиснути кнопку далі
+    public InlineKeyboardMarkup inlineDegreeOfRiskObjectAreaKitchenKeyboard(){
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(Collections.singletonList(InlineKeyboardButton.builder().text("Далі").callbackData("Далі кухні").build()));
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
+    }
     // якщо обрані об'єкти державної власності, що експлуатуються, то цей метод викинає наступне меню з вибором конкретного типу
     public InlineKeyboardMarkup inlineDegreeOfRiskStateOwnedObjectKeyboard(){
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
