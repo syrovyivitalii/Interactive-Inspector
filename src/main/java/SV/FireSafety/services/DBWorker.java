@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class DBWorker {
 
-    private final String HOST = "eu-cdbr-west-03.cleardb.net";
+    private final String HOST = "jdbc:mysql://eu-cdbr-west-03.cleardb.net/heroku_95ec7a49a1f5f1f?password=b6405bf3&reconnect=true&user=bac7c1b93d7a7a";
     private final String USERNAME = "bac7c1b93d7a7a";
     private final String PASSWORD = "b6405bf3";
 
