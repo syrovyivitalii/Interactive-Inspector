@@ -4,9 +4,9 @@ import java.sql.*;
 
 public class DBWorker {
 
-    private final String HOST = "jdbc:mysql://localhost:3306/interactive-inspector";
-    private final String USERNAME = "root";
-    private final String PASSWORD = "root";
+    private final String HOST = "eu-cdbr-west-03.cleardb.net";
+    private final String USERNAME = "bac7c1b93d7a7a";
+    private final String PASSWORD = "b6405bf3";
 
     Connection connection;
 
