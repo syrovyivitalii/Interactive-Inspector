@@ -13,7 +13,15 @@ public class DBWorker {
     public DBWorker(){
         try {
             connection = DriverManager.getConnection(HOST, USERNAME, PASSWORD);
-            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    Statement statement;
+
+    {
+        try {
+            statement = getConnection().createStatement();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -26,7 +34,6 @@ public class DBWorker {
     // перевірка чи користувач вже існує в базі даних
     public void checkUser(String chatID){
         try {
-            Statement statement = getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery("select * from users");
             int exists = 0;
             while (resultSet.next()){
@@ -49,7 +56,6 @@ public class DBWorker {
     //очищення бази
     public void update(String chatID){
         try {
-            Statement statement = getConnection().createStatement();
             String sql = "UPDATE users set typePremises=NULL,categoryPremises=NULL," +
                     "classFire=NULL,typeExtinguisher=NULL,typeSpacesBuild=NULL,b1=NULL,b2=NULL,kitchen=NULL," +
                     "characteristicsObject=NULL,typeObjectOfRisk=NULL,typeStateOwnedObject=NULL," +
@@ -70,7 +76,6 @@ public class DBWorker {
     // встановлення comandOfMenu
     public void setComandOfMenu(String chatID,String comand){
         try {
-            Statement statement = getConnection().createStatement();
             String sql = "UPDATE users set comandOfMenu='"+comand+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
@@ -83,7 +88,6 @@ public class DBWorker {
     public String getComandOfMenu(String chatID){
         String comandOfMenu= null;
         try {
-            Statement statement = getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery("select * from users where idTelegram ="+chatID);
             while (resultSet.next()){
                 comandOfMenu = resultSet.getString("comandOfMenu");
@@ -97,7 +101,6 @@ public class DBWorker {
     // встановлення TypePremises
     public void setTypePremises(String chatID,String typePremises){
         try {
-            Statement statement = getConnection().createStatement();
             String sql = "UPDATE users set typePremises='"+typePremises+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
@@ -110,7 +113,6 @@ public class DBWorker {
     public String getTypePremises(String chatID){
         String typePremises= null;
         try {
-            Statement statement = getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery("select * from users where idTelegram ="+chatID);
             while (resultSet.next()){
                 typePremises = resultSet.getString("typePremises");
@@ -124,7 +126,6 @@ public class DBWorker {
     // встановлення categoryPremises
     public void setCategoryPremises(String chatID,String categoryPremises){
         try {
-            Statement statement = getConnection().createStatement();
             String sql = "UPDATE users set categoryPremises='"+categoryPremises+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
@@ -137,7 +138,6 @@ public class DBWorker {
     public String getCategoryPremises(String chatID){
         String typePremises= null;
         try {
-            Statement statement = getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery("select * from users where idTelegram ="+chatID);
             while (resultSet.next()){
                 typePremises = resultSet.getString("categoryPremises");
@@ -151,7 +151,6 @@ public class DBWorker {
     // встановлення classFire
     public void setClassFire(String chatID,String classFire){
         try {
-            Statement statement = getConnection().createStatement();
             String sql = "UPDATE users set classFire='"+classFire+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
@@ -164,7 +163,6 @@ public class DBWorker {
     public String getClassFire(String chatID){
         String typePremises= null;
         try {
-            Statement statement = getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery("select * from users where idTelegram ="+chatID);
             while (resultSet.next()){
                 typePremises = resultSet.getString("classFire");
@@ -178,7 +176,6 @@ public class DBWorker {
     // встановлення typeExtinguisher
     public void setTypeExtinguisher(String chatID,String typeExtinguisher){
         try {
-            Statement statement = getConnection().createStatement();
             String sql = "UPDATE users set typeExtinguisher='"+typeExtinguisher+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
@@ -191,7 +188,6 @@ public class DBWorker {
     public String getTypeExtinguisher(String chatID){
         String typePremises= null;
         try {
-            Statement statement = getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery("select * from users where idTelegram ="+chatID);
             while (resultSet.next()){
                 typePremises = resultSet.getString("typeExtinguisher");
@@ -205,7 +201,6 @@ public class DBWorker {
     // встановлення typeSpacesBuild
     public void setTypeSpacesBuild(String chatID,String typeSpacesBuild){
         try {
-            Statement statement = getConnection().createStatement();
             String sql = "UPDATE users set typeSpacesBuild='"+typeSpacesBuild+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
@@ -218,7 +213,6 @@ public class DBWorker {
     public String getTypeSpacesBuild(String chatID){
         String typePremises= null;
         try {
-            Statement statement = getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery("select * from users where idTelegram ="+chatID);
             while (resultSet.next()){
                 typePremises = resultSet.getString("typeSpacesBuild");
@@ -232,7 +226,6 @@ public class DBWorker {
     // встановлення чи встановлюється в приміщеннях оргтехніка
     public void setB1(String chatID,String b1){
         try {
-            Statement statement = getConnection().createStatement();
             String sql = "UPDATE users set b1='"+b1+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
@@ -245,7 +238,6 @@ public class DBWorker {
     public String getB1(String chatID){
         String typePremises= null;
         try {
-            Statement statement = getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery("select * from users where idTelegram ="+chatID);
             while (resultSet.next()){
                 typePremises = resultSet.getString("b1");
@@ -259,7 +251,6 @@ public class DBWorker {
     // встановлення чи наявні технічні приміщення
     public void setB2(String chatID,String b2){
         try {
-            Statement statement = getConnection().createStatement();
             String sql = "UPDATE users set b2='"+b2+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
@@ -271,7 +262,6 @@ public class DBWorker {
     // встановлення kitchen
     public void setKitchen(String chatID,String kitchen){
         try {
-            Statement statement = getConnection().createStatement();
             String sql = "UPDATE users set kitchen='"+kitchen+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
@@ -284,7 +274,6 @@ public class DBWorker {
     public String getKitchen(String chatID){
         String typePremises= null;
         try {
-            Statement statement = getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery("select * from users where idTelegram ="+chatID);
             while (resultSet.next()){
                 typePremises = resultSet.getString("kitchen");
@@ -298,7 +287,6 @@ public class DBWorker {
     // встановлення characteristicsObject
     public void setCharacteristicsObject(String chatID,String characteristicsObject){
         try {
-            Statement statement = getConnection().createStatement();
             String sql = "UPDATE users set characteristicsObject='"+characteristicsObject+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
@@ -311,7 +299,6 @@ public class DBWorker {
     public String getCharacteristicsObject(String chatID){
         String typePremises= null;
         try {
-            Statement statement = getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery("select * from users where idTelegram ="+chatID);
             while (resultSet.next()){
                 typePremises = resultSet.getString("characteristicsObject");
@@ -325,7 +312,6 @@ public class DBWorker {
     // встановлення typeObjectOfRisk
     public void setTypeObjectOfRisk(String chatID,String typeObjectOfRisk){
         try {
-            Statement statement = getConnection().createStatement();
             String sql = "UPDATE users set typeObjectOfRisk='"+typeObjectOfRisk+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
@@ -338,7 +324,6 @@ public class DBWorker {
     public String getTypeObjectOfRisk(String chatID){
         String typePremises= null;
         try {
-            Statement statement = getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery("select * from users where idTelegram ="+chatID);
             while (resultSet.next()){
                 typePremises = resultSet.getString("typeObjectOfRisk");
@@ -352,7 +337,6 @@ public class DBWorker {
     // встановлення typeIndustrialStorageFacility
     public void setTypeIndustrialStorageFacility(String chatID,String typeIndustrialStorageFacility){
         try {
-            Statement statement = getConnection().createStatement();
             String sql = "UPDATE users set typeIndustrialStorageFacility='"+typeIndustrialStorageFacility+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
@@ -365,7 +349,6 @@ public class DBWorker {
     public String getTypeIndustrialStorageFacility(String chatID){
         String typePremises= null;
         try {
-            Statement statement = getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery("select * from users where idTelegram ="+chatID);
             while (resultSet.next()){
                 typePremises = resultSet.getString("typeIndustrialStorageFacility");
@@ -379,7 +362,6 @@ public class DBWorker {
     // встановлення typeStateOwnedObject
     public void setTypeStateOwnedObject(String chatID,String typeStateOwnedObject){
         try {
-            Statement statement = getConnection().createStatement();
             String sql = "UPDATE users set typeStateOwnedObject='"+typeStateOwnedObject+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
@@ -392,7 +374,6 @@ public class DBWorker {
     public String getTypeStateOwnedObject(String chatID){
         String typePremises= null;
         try {
-            Statement statement = getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery("select * from users where idTelegram ="+chatID);
             while (resultSet.next()){
                 typePremises = resultSet.getString("typeStateOwnedObject");
@@ -406,7 +387,6 @@ public class DBWorker {
     // встановлення typeCulturalObject
     public void setTypeCulturalObject(String chatID,String typeCulturalObject){
         try {
-            Statement statement = getConnection().createStatement();
             String sql = "UPDATE users set typeCulturalObject='"+typeCulturalObject+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
@@ -419,7 +399,6 @@ public class DBWorker {
     public String getTypeCulturalObject(String chatID){
         String typePremises= null;
         try {
-            Statement statement = getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery("select * from users where idTelegram ="+chatID);
             while (resultSet.next()){
                 typePremises = resultSet.getString("typeCulturalObject");
@@ -433,7 +412,6 @@ public class DBWorker {
     // встановлення levelEmergency
     public void setLevelEmergency(String chatID,String levelEmergency){
         try {
-            Statement statement = getConnection().createStatement();
             String sql = "UPDATE users set levelEmergency='"+levelEmergency+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
@@ -446,7 +424,6 @@ public class DBWorker {
     public String getLevelEmergency(String chatID){
         String typePremises= null;
         try {
-            Statement statement = getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery("select * from users where idTelegram ="+chatID);
             while (resultSet.next()){
                 typePremises = resultSet.getString("levelEmergency");
@@ -460,7 +437,6 @@ public class DBWorker {
     // встановлення typeResultDegreeRisk
     public void setTypeResultDegreeRisk(String chatID,String typeResultDegreeRisk){
         try {
-            Statement statement = getConnection().createStatement();
             String sql = "UPDATE users set typeResultDegreeRisk='"+typeResultDegreeRisk+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
@@ -473,7 +449,6 @@ public class DBWorker {
     public String getTypeResultDegreeRisk(String chatID){
         String typePremises= null;
         try {
-            Statement statement = getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery("select * from users where idTelegram ="+chatID);
             while (resultSet.next()){
                 typePremises = resultSet.getString("typeResultDegreeRisk");
@@ -487,7 +462,6 @@ public class DBWorker {
     // встановлення usedIndoors
     public void setUsedIndoors(String chatID,String usedIndoors){
         try {
-            Statement statement = getConnection().createStatement();
             String sql = "UPDATE users set usedIndoors='"+usedIndoors+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
@@ -500,7 +474,6 @@ public class DBWorker {
     public String getUsedIndoors(String chatID){
         String typePremises= null;
         try {
-            Statement statement = getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery("select * from users where idTelegram ="+chatID);
             while (resultSet.next()){
                 typePremises = resultSet.getString("usedIndoors");
@@ -514,7 +487,6 @@ public class DBWorker {
     // встановлення categoryBuildings
     public void setCategoryBuildings(String chatID,String categoryBuildings){
         try {
-            Statement statement = getConnection().createStatement();
             String sql = "UPDATE users set categoryBuildings='"+categoryBuildings+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
@@ -527,7 +499,6 @@ public class DBWorker {
     public String getCategoryBuildings(String chatID){
         String typePremises= null;
         try {
-            Statement statement = getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery("select * from users where idTelegram ="+chatID);
             while (resultSet.next()){
                 typePremises = resultSet.getString("categoryBuildings");
@@ -541,7 +512,6 @@ public class DBWorker {
     // встановлення value
     public void setValue(String chatID,String value){
         try {
-            Statement statement = getConnection().createStatement();
             String sql = "UPDATE users set value='"+value+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
@@ -554,7 +524,6 @@ public class DBWorker {
     public String getValue(String chatID){
         String typePremises= null;
         try {
-            Statement statement = getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery("select * from users where idTelegram ="+chatID);
             while (resultSet.next()){
                 typePremises = resultSet.getString("value");
@@ -568,7 +537,6 @@ public class DBWorker {
     // встановлення square
     public void setSquare(String chatID,String square){
         try {
-            Statement statement = getConnection().createStatement();
             String sql = "UPDATE users set square='"+square+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
@@ -581,7 +549,6 @@ public class DBWorker {
     public String getSquare(String chatID){
         String typePremises= null;
         try {
-            Statement statement = getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery("select * from users where idTelegram ="+chatID);
             while (resultSet.next()){
                 typePremises = resultSet.getString("square");
@@ -595,7 +562,6 @@ public class DBWorker {
     // встановлення parking
     public void setParking(String chatID,String parking){
         try {
-            Statement statement = getConnection().createStatement();
             String sql = "UPDATE users set parking='"+parking+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
@@ -608,7 +574,6 @@ public class DBWorker {
     public String getParking(String chatID){
         String typePremises= null;
         try {
-            Statement statement = getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery("select * from users where idTelegram ="+chatID);
             while (resultSet.next()){
                 typePremises = resultSet.getString("parking");
@@ -622,7 +587,6 @@ public class DBWorker {
     // встановлення workplace
     public void setWorkplace(String chatID,String workplace){
         try {
-            Statement statement = getConnection().createStatement();
             String sql = "UPDATE users set workplace='"+workplace+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
@@ -635,7 +599,6 @@ public class DBWorker {
     public String getWorkplace(String chatID){
         String typePremises= null;
         try {
-            Statement statement = getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery("select * from users where idTelegram ="+chatID);
             while (resultSet.next()){
                 typePremises = resultSet.getString("workplace");
@@ -649,7 +612,6 @@ public class DBWorker {
     // встановлення squareTechnicalPremises
     public void setSquareTechnicalPremises(String chatID,String squareTechnicalPremises){
         try {
-            Statement statement = getConnection().createStatement();
             String sql = "UPDATE users set squareTechnicalPremises='"+squareTechnicalPremises+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
@@ -662,7 +624,6 @@ public class DBWorker {
     public String getSquareTechnicalPremises(String chatID){
         String typePremises= null;
         try {
-            Statement statement = getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery("select * from users where idTelegram ="+chatID);
             while (resultSet.next()){
                 typePremises = resultSet.getString("squareTechnicalPremises");
@@ -676,7 +637,6 @@ public class DBWorker {
     // встановлення constantlyAtFacility
     public void setConstantlyAtFacility(String chatID,String constantlyAtFacility){
         try {
-            Statement statement = getConnection().createStatement();
             String sql = "UPDATE users set constantlyAtFacility='"+constantlyAtFacility+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
@@ -689,7 +649,6 @@ public class DBWorker {
     public String getConstantlyAtFacility(String chatID){
         String typePremises= null;
         try {
-            Statement statement = getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery("select * from users where idTelegram ="+chatID);
             while (resultSet.next()){
                 typePremises = resultSet.getString("constantlyAtFacility");
@@ -703,7 +662,6 @@ public class DBWorker {
     // встановлення periodicallyAtFacility
     public void setPeriodicallyAtFacility(String chatID,String periodicallyAtFacility){
         try {
-            Statement statement = getConnection().createStatement();
             String sql = "UPDATE users set periodicallyAtFacility='"+periodicallyAtFacility+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
@@ -716,7 +674,6 @@ public class DBWorker {
     public String getPeriodicallyAtFacility(String chatID){
         String typePremises= null;
         try {
-            Statement statement = getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery("select * from users where idTelegram ="+chatID);
             while (resultSet.next()){
                 typePremises = resultSet.getString("periodicallyAtFacility");
@@ -730,7 +687,6 @@ public class DBWorker {
     // встановлення heightObject
     public void setHeightObject(String chatID,String heightObject){
         try {
-            Statement statement = getConnection().createStatement();
             String sql = "UPDATE users set heightObject='"+heightObject+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
@@ -743,7 +699,6 @@ public class DBWorker {
     public String getHeightObject(String chatID){
         String typePremises= null;
         try {
-            Statement statement = getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery("select * from users where idTelegram ="+chatID);
             while (resultSet.next()){
                 typePremises = resultSet.getString("heightObject");
@@ -757,7 +712,6 @@ public class DBWorker {
     // встановлення fixedViolations
     public void setFixedViolations(String chatID,String fixedViolations){
         try {
-            Statement statement = getConnection().createStatement();
             String sql = "UPDATE users set fixedViolations='"+fixedViolations+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
@@ -770,7 +724,6 @@ public class DBWorker {
     public String getFixedViolations(String chatID){
         String typePremises= null;
         try {
-            Statement statement = getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery("select * from users where idTelegram ="+chatID);
             while (resultSet.next()){
                 typePremises = resultSet.getString("fixedViolations");
@@ -784,7 +737,6 @@ public class DBWorker {
     // встановлення noFixedViolations
     public void setNoFixedViolations(String chatID,String noFixedViolations){
         try {
-            Statement statement = getConnection().createStatement();
             String sql = "UPDATE users set noFixedViolations='"+noFixedViolations+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
@@ -797,7 +749,6 @@ public class DBWorker {
     public String getNoFixedViolations(String chatID){
         String typePremises= null;
         try {
-            Statement statement = getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery("select * from users where idTelegram ="+chatID);
             while (resultSet.next()){
                 typePremises = resultSet.getString("noFixedViolations");
@@ -811,7 +762,6 @@ public class DBWorker {
     // встановлення deadPeople
     public void setDeadPeople(String chatID,String deadPeople){
         try {
-            Statement statement = getConnection().createStatement();
             String sql = "UPDATE users set deadPeople='"+deadPeople+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
@@ -824,7 +774,6 @@ public class DBWorker {
     public String getDeadPeople(String chatID){
         String typePremises= null;
         try {
-            Statement statement = getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery("select * from users where idTelegram ="+chatID);
             while (resultSet.next()){
                 typePremises = resultSet.getString("deadPeople");
@@ -838,7 +787,6 @@ public class DBWorker {
     // встановлення losses
     public void setLosses(String chatID,String losses){
         try {
-            Statement statement = getConnection().createStatement();
             String sql = "UPDATE users set losses='"+losses+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
@@ -851,7 +799,6 @@ public class DBWorker {
     public String getLosses(String chatID){
         String typePremises= null;
         try {
-            Statement statement = getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery("select * from users where idTelegram ="+chatID);
             while (resultSet.next()){
                 typePremises = resultSet.getString("losses");
@@ -865,7 +812,6 @@ public class DBWorker {
     // встановлення taxFreeIncome
     public void setTaxFreeIncome(String chatID,String taxFreeIncome){
         try {
-            Statement statement = getConnection().createStatement();
             String sql = "UPDATE users set taxFreeIncome='"+taxFreeIncome+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
@@ -878,7 +824,6 @@ public class DBWorker {
     public String getTaxFreeIncome(String chatID){
         String typePremises= null;
         try {
-            Statement statement = getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery("select * from users where idTelegram ="+chatID);
             while (resultSet.next()){
                 typePremises = resultSet.getString("taxFreeIncome");
@@ -892,7 +837,6 @@ public class DBWorker {
     // встановлення injuredPeople
     public void setInjuredPeople(String chatID,String injuredPeople){
         try {
-            Statement statement = getConnection().createStatement();
             String sql = "UPDATE users set injuredPeople='"+injuredPeople+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
@@ -905,7 +849,6 @@ public class DBWorker {
     public String getInjuredPeople(String chatID){
         String typePremises= null;
         try {
-            Statement statement = getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery("select * from users where idTelegram ="+chatID);
             while (resultSet.next()){
                 typePremises = resultSet.getString("injuredPeople");
@@ -919,7 +862,6 @@ public class DBWorker {
     // встановлення volumePremises
     public void setVolumePremises(String chatID,String volumePremises){
         try {
-            Statement statement = getConnection().createStatement();
             String sql = "UPDATE users set volumePremises='"+volumePremises+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
@@ -932,7 +874,6 @@ public class DBWorker {
     public String getVolumePremises(String chatID){
         String typePremises= null;
         try {
-            Statement statement = getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery("select * from users where idTelegram ="+chatID);
             while (resultSet.next()){
                 typePremises = resultSet.getString("volumePremises");
@@ -946,7 +887,6 @@ public class DBWorker {
     // встановлення volumeRoomsA
     public void setVolumeRoomsA(String chatID,String volumeRoomsA){
         try {
-            Statement statement = getConnection().createStatement();
             String sql = "UPDATE users set volumeRoomsA='"+volumeRoomsA+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
@@ -959,7 +899,6 @@ public class DBWorker {
     public String getVolumeRoomsA(String chatID){
         String typePremises= null;
         try {
-            Statement statement = getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery("select * from users where idTelegram ="+chatID);
             while (resultSet.next()){
                 typePremises = resultSet.getString("volumeRoomsA");
@@ -973,7 +912,6 @@ public class DBWorker {
     // встановлення volumeRoomsБ
     public void setVolumeRoomsБ(String chatID,String volumeRoomsБ){
         try {
-            Statement statement = getConnection().createStatement();
             String sql = "UPDATE users set volumeRoomsБ='"+volumeRoomsБ+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
@@ -986,7 +924,6 @@ public class DBWorker {
     public String getVolumeRoomsБ(String chatID){
         String typePremises= null;
         try {
-            Statement statement = getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery("select * from users where idTelegram ="+chatID);
             while (resultSet.next()){
                 typePremises = resultSet.getString("volumeRoomsБ");
@@ -1000,7 +937,6 @@ public class DBWorker {
     // встановлення volumeRoomsB
     public void setVolumeRoomsB(String chatID,String volumeRoomsB){
         try {
-            Statement statement = getConnection().createStatement();
             String sql = "UPDATE users set volumeRoomsB='"+volumeRoomsB+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
@@ -1013,7 +949,6 @@ public class DBWorker {
     public String getVolumeRoomsB(String chatID){
         String typePremises= null;
         try {
-            Statement statement = getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery("select * from users where idTelegram ="+chatID);
             while (resultSet.next()){
                 typePremises = resultSet.getString("volumeRoomsB");
@@ -1027,7 +962,6 @@ public class DBWorker {
     // встановлення volumeRoomsГ
     public void setVolumeRoomsГ(String chatID,String volumeRoomsГ){
         try {
-            Statement statement = getConnection().createStatement();
             String sql = "UPDATE users set volumeRoomsГ='"+volumeRoomsГ+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
@@ -1040,7 +974,6 @@ public class DBWorker {
     public String getVolumeRoomsГ(String chatID){
         String typePremises= null;
         try {
-            Statement statement = getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery("select * from users where idTelegram ="+chatID);
             while (resultSet.next()){
                 typePremises = resultSet.getString("volumeRoomsГ");
