@@ -39,6 +39,8 @@ public class DBWorker {
                 statement.addBatch(sql);
                 statement.executeBatch();
             }
+            resultSet.close();
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -59,6 +61,7 @@ public class DBWorker {
                     "volumeRoomsГ=NULL where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -70,6 +73,7 @@ public class DBWorker {
             String sql = "UPDATE users set comandOfMenu='"+comand+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -83,6 +87,7 @@ public class DBWorker {
             while (resultSet.next()){
                 comandOfMenu = resultSet.getString("comandOfMenu");
             }
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -95,6 +100,7 @@ public class DBWorker {
             String sql = "UPDATE users set typePremises='"+typePremises+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -108,6 +114,7 @@ public class DBWorker {
             while (resultSet.next()){
                 typePremises = resultSet.getString("typePremises");
             }
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -120,6 +127,7 @@ public class DBWorker {
             String sql = "UPDATE users set categoryPremises='"+categoryPremises+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -133,6 +141,7 @@ public class DBWorker {
             while (resultSet.next()){
                 typePremises = resultSet.getString("categoryPremises");
             }
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -145,6 +154,7 @@ public class DBWorker {
             String sql = "UPDATE users set classFire='"+classFire+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -158,6 +168,7 @@ public class DBWorker {
             while (resultSet.next()){
                 typePremises = resultSet.getString("classFire");
             }
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -170,6 +181,7 @@ public class DBWorker {
             String sql = "UPDATE users set typeExtinguisher='"+typeExtinguisher+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -183,6 +195,7 @@ public class DBWorker {
             while (resultSet.next()){
                 typePremises = resultSet.getString("typeExtinguisher");
             }
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -195,6 +208,7 @@ public class DBWorker {
             String sql = "UPDATE users set typeSpacesBuild='"+typeSpacesBuild+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -208,6 +222,7 @@ public class DBWorker {
             while (resultSet.next()){
                 typePremises = resultSet.getString("typeSpacesBuild");
             }
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -220,6 +235,7 @@ public class DBWorker {
             String sql = "UPDATE users set b1='"+b1+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -233,6 +249,7 @@ public class DBWorker {
             while (resultSet.next()){
                 typePremises = resultSet.getString("b1");
             }
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -245,6 +262,7 @@ public class DBWorker {
             String sql = "UPDATE users set b2='"+b2+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -256,6 +274,7 @@ public class DBWorker {
             String sql = "UPDATE users set kitchen='"+kitchen+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -269,6 +288,7 @@ public class DBWorker {
             while (resultSet.next()){
                 typePremises = resultSet.getString("kitchen");
             }
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -281,6 +301,7 @@ public class DBWorker {
             String sql = "UPDATE users set characteristicsObject='"+characteristicsObject+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -294,6 +315,7 @@ public class DBWorker {
             while (resultSet.next()){
                 typePremises = resultSet.getString("characteristicsObject");
             }
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -306,6 +328,7 @@ public class DBWorker {
             String sql = "UPDATE users set typeObjectOfRisk='"+typeObjectOfRisk+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -319,6 +342,7 @@ public class DBWorker {
             while (resultSet.next()){
                 typePremises = resultSet.getString("typeObjectOfRisk");
             }
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -331,6 +355,7 @@ public class DBWorker {
             String sql = "UPDATE users set typeIndustrialStorageFacility='"+typeIndustrialStorageFacility+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -344,6 +369,7 @@ public class DBWorker {
             while (resultSet.next()){
                 typePremises = resultSet.getString("typeIndustrialStorageFacility");
             }
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -356,6 +382,7 @@ public class DBWorker {
             String sql = "UPDATE users set typeStateOwnedObject='"+typeStateOwnedObject+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -369,6 +396,7 @@ public class DBWorker {
             while (resultSet.next()){
                 typePremises = resultSet.getString("typeStateOwnedObject");
             }
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -381,6 +409,7 @@ public class DBWorker {
             String sql = "UPDATE users set typeCulturalObject='"+typeCulturalObject+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -394,6 +423,7 @@ public class DBWorker {
             while (resultSet.next()){
                 typePremises = resultSet.getString("typeCulturalObject");
             }
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -406,6 +436,7 @@ public class DBWorker {
             String sql = "UPDATE users set levelEmergency='"+levelEmergency+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -419,6 +450,7 @@ public class DBWorker {
             while (resultSet.next()){
                 typePremises = resultSet.getString("levelEmergency");
             }
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -431,6 +463,7 @@ public class DBWorker {
             String sql = "UPDATE users set typeResultDegreeRisk='"+typeResultDegreeRisk+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -444,6 +477,7 @@ public class DBWorker {
             while (resultSet.next()){
                 typePremises = resultSet.getString("typeResultDegreeRisk");
             }
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -456,6 +490,7 @@ public class DBWorker {
             String sql = "UPDATE users set usedIndoors='"+usedIndoors+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -469,6 +504,7 @@ public class DBWorker {
             while (resultSet.next()){
                 typePremises = resultSet.getString("usedIndoors");
             }
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -481,6 +517,7 @@ public class DBWorker {
             String sql = "UPDATE users set categoryBuildings='"+categoryBuildings+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -494,6 +531,7 @@ public class DBWorker {
             while (resultSet.next()){
                 typePremises = resultSet.getString("categoryBuildings");
             }
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -506,6 +544,7 @@ public class DBWorker {
             String sql = "UPDATE users set value='"+value+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -519,6 +558,7 @@ public class DBWorker {
             while (resultSet.next()){
                 typePremises = resultSet.getString("value");
             }
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -531,6 +571,7 @@ public class DBWorker {
             String sql = "UPDATE users set square='"+square+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -544,6 +585,7 @@ public class DBWorker {
             while (resultSet.next()){
                 typePremises = resultSet.getString("square");
             }
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -556,6 +598,7 @@ public class DBWorker {
             String sql = "UPDATE users set parking='"+parking+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -569,6 +612,7 @@ public class DBWorker {
             while (resultSet.next()){
                 typePremises = resultSet.getString("parking");
             }
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -581,6 +625,7 @@ public class DBWorker {
             String sql = "UPDATE users set workplace='"+workplace+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -594,6 +639,7 @@ public class DBWorker {
             while (resultSet.next()){
                 typePremises = resultSet.getString("workplace");
             }
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -606,6 +652,7 @@ public class DBWorker {
             String sql = "UPDATE users set squareTechnicalPremises='"+squareTechnicalPremises+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -619,6 +666,7 @@ public class DBWorker {
             while (resultSet.next()){
                 typePremises = resultSet.getString("squareTechnicalPremises");
             }
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -631,6 +679,7 @@ public class DBWorker {
             String sql = "UPDATE users set constantlyAtFacility='"+constantlyAtFacility+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -644,6 +693,7 @@ public class DBWorker {
             while (resultSet.next()){
                 typePremises = resultSet.getString("constantlyAtFacility");
             }
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -656,6 +706,7 @@ public class DBWorker {
             String sql = "UPDATE users set periodicallyAtFacility='"+periodicallyAtFacility+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -669,6 +720,7 @@ public class DBWorker {
             while (resultSet.next()){
                 typePremises = resultSet.getString("periodicallyAtFacility");
             }
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -681,6 +733,7 @@ public class DBWorker {
             String sql = "UPDATE users set heightObject='"+heightObject+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -694,6 +747,7 @@ public class DBWorker {
             while (resultSet.next()){
                 typePremises = resultSet.getString("heightObject");
             }
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -706,6 +760,7 @@ public class DBWorker {
             String sql = "UPDATE users set fixedViolations='"+fixedViolations+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -719,6 +774,7 @@ public class DBWorker {
             while (resultSet.next()){
                 typePremises = resultSet.getString("fixedViolations");
             }
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -731,6 +787,7 @@ public class DBWorker {
             String sql = "UPDATE users set noFixedViolations='"+noFixedViolations+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -744,6 +801,7 @@ public class DBWorker {
             while (resultSet.next()){
                 typePremises = resultSet.getString("noFixedViolations");
             }
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -756,6 +814,7 @@ public class DBWorker {
             String sql = "UPDATE users set deadPeople='"+deadPeople+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -769,6 +828,7 @@ public class DBWorker {
             while (resultSet.next()){
                 typePremises = resultSet.getString("deadPeople");
             }
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -781,6 +841,7 @@ public class DBWorker {
             String sql = "UPDATE users set losses='"+losses+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -794,6 +855,7 @@ public class DBWorker {
             while (resultSet.next()){
                 typePremises = resultSet.getString("losses");
             }
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -806,6 +868,7 @@ public class DBWorker {
             String sql = "UPDATE users set taxFreeIncome='"+taxFreeIncome+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -819,6 +882,7 @@ public class DBWorker {
             while (resultSet.next()){
                 typePremises = resultSet.getString("taxFreeIncome");
             }
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -831,6 +895,7 @@ public class DBWorker {
             String sql = "UPDATE users set injuredPeople='"+injuredPeople+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -844,6 +909,7 @@ public class DBWorker {
             while (resultSet.next()){
                 typePremises = resultSet.getString("injuredPeople");
             }
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -856,6 +922,7 @@ public class DBWorker {
             String sql = "UPDATE users set volumePremises='"+volumePremises+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -869,6 +936,7 @@ public class DBWorker {
             while (resultSet.next()){
                 typePremises = resultSet.getString("volumePremises");
             }
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -881,6 +949,7 @@ public class DBWorker {
             String sql = "UPDATE users set volumeRoomsA='"+volumeRoomsA+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -894,6 +963,7 @@ public class DBWorker {
             while (resultSet.next()){
                 typePremises = resultSet.getString("volumeRoomsA");
             }
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -906,6 +976,7 @@ public class DBWorker {
             String sql = "UPDATE users set volumeRoomsБ='"+volumeRoomsБ+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -919,6 +990,7 @@ public class DBWorker {
             while (resultSet.next()){
                 typePremises = resultSet.getString("volumeRoomsБ");
             }
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -931,6 +1003,7 @@ public class DBWorker {
             String sql = "UPDATE users set volumeRoomsB='"+volumeRoomsB+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -944,6 +1017,7 @@ public class DBWorker {
             while (resultSet.next()){
                 typePremises = resultSet.getString("volumeRoomsB");
             }
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -956,6 +1030,7 @@ public class DBWorker {
             String sql = "UPDATE users set volumeRoomsГ='"+volumeRoomsГ+"' where idTelegram="+chatID;
             statement.addBatch(sql);
             statement.executeBatch();
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -969,6 +1044,7 @@ public class DBWorker {
             while (resultSet.next()){
                 typePremises = resultSet.getString("volumeRoomsГ");
             }
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
